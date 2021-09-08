@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.main {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.input {
+  display: inline-block;
+  width: 30vw;
+  margin-bottom: 18px;
+}
+
+.add-btn {
+  width: 50px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.todo {
+  cursor: pointer;
+  margin-right: 20px;
+}

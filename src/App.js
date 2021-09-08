@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { backend_url } from "./config/config";
 import Todo from "./components/Todo";
+import "./App.css";
 
 function App() {
   const [todo, setTodo] = useState("");
@@ -29,13 +30,15 @@ function App() {
 
   const addTodo = async () => {
     try {
-      let obj = {
-        todo,
-      };
-      await axios.post(`${backend_url}/api/add`, obj);
-      setTodo("");
-      console.log("it workd");
-      setRefresh(!refresh);
+      if (todo.length !== 0) {
+        let obj = {
+          todo,
+        };
+        await axios.post(`${backend_url}/api/add`, obj);
+        setTodo("");
+        console.log("it workd");
+        setRefresh(!refresh);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -51,16 +54,32 @@ function App() {
   };
 
   return (
-    <>
-      <h1>Todo</h1>
-      <input type="text" onChange={handleTodo} />
-      <button onClick={addTodo}>Add</button>
+    <div>
+      <div className="main">
+        <h1>Todo-App</h1>
+        <input type="text" onChange={handleTodo} className="input" />
+        <button className="add-btn" onClick={addTodo}>
+          Add
+        </button>
+      </div>
       <div className="todos">
         {todos.map((todo) => (
-          <Todo todo={todo} key={todo._id} handleDelete={handleDelete} />
+          <ul>
+            <Todo key={todo._id} todo={todo} handleDelete={handleDelete} />
+          </ul>
         ))}
       </div>
-    </>
+      <p
+        style={{
+          marginLeft: "20px",
+          textAlign: "center",
+          position: "absolute",
+          bottom: "0px",
+        }}
+      >
+        Note : Click todo to delete
+      </p>
+    </div>
   );
 }
 

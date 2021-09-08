@@ -1,5 +1,9 @@
 const Todo = ({ todo: { todo, _id }, handleDelete }) => {
-  return <h3 onClick={() => handleDelete(_id)}>{todo}</h3>;
+  return (
+    <li className="todo" onClick={() => handleDelete(_id)}>
+      {todo}
+    </li>
+  );
 };
 
 export default Todo;
